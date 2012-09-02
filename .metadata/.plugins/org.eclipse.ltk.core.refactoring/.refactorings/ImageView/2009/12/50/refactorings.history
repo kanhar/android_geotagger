@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com.adnan&apos; to &apos;com.ad&apos;&#x0D;&#x0A;- Original project: &apos;ImageView&apos;&#x0D;&#x0A;- Original element: &apos;ImageView/src/com.adnan&apos;&#x0D;&#x0A;- Renamed element: &apos;ImageView/src/com.ad&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.adnan&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;com.adnan" name="com.ad" qualified="false" references="true" stamp="1260156562953" textual="false" version="1.0"/>
+</session>

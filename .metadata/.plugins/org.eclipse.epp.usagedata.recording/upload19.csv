@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+java.vm.specification.version,sysinfo,,,"1.0",1252363710062
+java.vm.vendor,sysinfo,,,"Sun Microsystems Inc.",1252363710062
+java.vm.version,sysinfo,,,"14.2-b01",1252363710062
+activated,view,org.eclipse.ui.console,3.4.0.v20090513,"org.eclipse.ui.console.ConsoleView",1252363711484
+started,bundle,org.eclipse.debug.core,3.5.0.v20090526-1600,"org.eclipse.debug.core",1252363722984
+started,bundle,org.eclipse.jdt.launching,3.5.0.v20090527,"org.eclipse.jdt.launching",1252363723046
+started,bundle,org.eclipse.jdt.apt.core,3.3.200.v20090528-1135,"org.eclipse.jdt.apt.core",1252363723046
+opened,view,org.eclipse.ui.ide,3.5.0.I20090525-2000,"org.eclipse.ui.views.ProblemView",1252363736125
+activated,view,org.eclipse.ui.ide,3.5.0.I20090525-2000,"org.eclipse.ui.views.ProblemView",1252363736156
+started,bundle,org.eclipse.jdt.junit,3.5.0.v20090526-2000,"org.eclipse.jdt.junit",1252363737515
+activated,view,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.PackageExplorer",1252363742234
+started,bundle,org.eclipse.wst.sse.core,1.1.400.v200905141750,"org.eclipse.wst.sse.core",1252363742437
+error,log,,,"Could not create action delegate for id: com.android.ide.eclipse.adt.project.NewXmlFileWizardAction",1252363742921
+error,log,,,"Plug-in com.android.ide.eclipse.adt was unable to load class com.android.ide.eclipse.adt.project.NewXmlFileWizardAction.",1252363742921
+started,bundle,org.eclipse.compare,3.5.0.I20090514-0808,"org.eclipse.compare",1252363743093
+started,bundle,org.eclipse.debug.ui,3.5.0.v20090603,"org.eclipse.debug.ui",1252363750296
+executed,command,,,"com.android.ide.eclipse.adt.debug.launching.LaunchShortcut.run",1252363750890
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363751109
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363752390
+activated,view,org.eclipse.ui.ide,3.5.0.I20090525-2000,"org.eclipse.ui.views.ProblemView",1252363760578
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363774156
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363780656
+started,bundle,org.eclipse.compare.core,3.5.0.I20090430-0408,"org.eclipse.compare.core",1252363792609
+opened,editor,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.CompilationUnitEditor",1252363792843
+started,bundle,org.eclipse.jdt.debug,3.5.0.v20090526,"org.eclipse.jdt.debug",1252363794109

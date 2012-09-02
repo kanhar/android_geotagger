@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ImageSearch!</string>
+    <string name="app_name">Image Search and View</string>
+    <string name="btn_ok">Search</string>
+    <string name="image_viewer_label">Viewer</string>
+</resources>

@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+java.vm.specification.version,sysinfo,,,"1.0",1252386374140
+java.vm.vendor,sysinfo,,,"Sun Microsystems Inc.",1252386374140
+java.vm.version,sysinfo,,,"14.2-b01",1252386374140
+opened,view,org.eclipse.ui.ide,3.5.0.I20090525-2000,"org.eclipse.ui.views.ProblemView",1252386375406
+started,bundle,org.eclipse.ltk.core.refactoring,3.5.0.v20090513-2000,"org.eclipse.ltk.core.refactoring",1252386376046
+activated,view,org.eclipse.ui.ide,3.5.0.I20090525-2000,"org.eclipse.ui.views.ProblemView",1252386376062
+started,bundle,org.eclipse.ltk.ui.refactoring,3.4.100.v20090604,"org.eclipse.ltk.ui.refactoring",1252386376156
+started,bundle,org.eclipse.wst.sse.core,1.1.400.v200905141750,"org.eclipse.wst.sse.core",1252386376890
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252386380140
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252386381281
+activated,view,org.eclipse.ui.console,3.4.0.v20090513,"org.eclipse.ui.console.ConsoleView",1252386381484
+started,bundle,org.eclipse.jdt.junit,3.5.0.v20090526-2000,"org.eclipse.jdt.junit",1252386381937
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252386382656
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252386388421
+opened,view,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.SourceView",1252386394312
+activated,view,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.SourceView",1252386394343
+activated,view,org.eclipse.ui.console,3.4.0.v20090513,"org.eclipse.ui.console.ConsoleView",1252386394968
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252386399828
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252386401968
+activated,view,org.eclipse.ui.ide,3.5.0.I20090525-2000,"org.eclipse.ui.views.ProblemView",1252386409937
+opened,view,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.JavadocView",1252386410937
+activated,view,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.JavadocView",1252386410953
+activated,view,org.eclipse.ui.ide,3.5.0.I20090525-2000,"org.eclipse.ui.views.ProblemView",1252386411812
+activated,view,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.SourceView",1252386412265
+activated,view,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.JavadocView",1252386413437

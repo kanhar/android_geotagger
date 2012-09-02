@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,view,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.PackageExplorer",1252363391093
+activated,view,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.PackageExplorer",1252363391203
+closed,view,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.internal.introview",1252363391296
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363396390
+started,bundle,com.android.ide.eclipse.ddms,0.9.1.v200905011822-1621,"com.android.ide.eclipse.ddms",1252363398531
+started,bundle,com.android.ide.eclipse.adt,0.9.1.v200905011822-1621,"com.android.ide.eclipse.adt",1252363398656
+started,bundle,org.eclipse.core.filesystem,1.2.0.v20090507,"org.eclipse.core.filesystem",1252363398875
+started,bundle,org.eclipse.ltk.core.refactoring,3.5.0.v20090513-2000,"org.eclipse.ltk.core.refactoring",1252363398875
+started,bundle,org.eclipse.ltk.ui.refactoring,3.4.100.v20090604,"org.eclipse.ltk.ui.refactoring",1252363398890
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363430796
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363433234
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363438359
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363439093
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363526000
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363526312
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363554187
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363555703
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363558390
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363563125
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363611078
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363614765
+error,log,,,"Failed to load properties file for project 'geotag'",1252363635328
+error,log,,,"Failed to load properties file for project 'geotag'",1252363635343
+opened,view,org.eclipse.ui.console,3.4.0.v20090513,"org.eclipse.ui.console.ConsoleView",1252363635843
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363637140

@@ -1,0 +1,390 @@
+package com.geotag;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import org.apache.sanselan.ImageReadException;
+import org.apache.sanselan.ImageWriteException;
+import org.apache.sanselan.Sanselan;
+import org.apache.sanselan.common.IImageMetadata;
+import org.apache.sanselan.formats.jpeg.JpegImageMetadata;
+import org.apache.sanselan.formats.jpeg.exifRewrite.ExifRewriter;
+import org.apache.sanselan.formats.tiff.TiffImageMetadata;
+import org.apache.sanselan.formats.tiff.constants.ExifTagConstants;
+import org.apache.sanselan.formats.tiff.constants.TiffConstants;
+import org.apache.sanselan.formats.tiff.constants.TiffFieldTypeConstants;
+import org.apache.sanselan.formats.tiff.write.TiffOutputDirectory;
+import org.apache.sanselan.formats.tiff.write.TiffOutputField;
+import org.apache.sanselan.formats.tiff.write.TiffOutputSet;
+
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.PixelFormat;
+import android.hardware.Camera;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.location.LocationProvider;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+
+public class TakeSnap extends Activity implements SurfaceHolder.Callback {
+	public static final String TAG = "TAKE_SNAP";
+
+	private final int ACTIVITY_EXTRA_INFO = 0;
+
+	private Camera mCamera;
+	private SurfaceHolder mSurfaceHolder;
+	private SurfaceView mSurfaceView;
+	private LocationManager mLocationManager;
+	private MyLocationListener mLocationListener;
+	private byte[] mPictureData;
+
+	/** Called when the activity is first created. */
+	//@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Log.i(TAG, "onCreate");
+
+		// For the moment I am only interested in GPS updates
+		mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		
+		try {
+			mLocationManager.requestLocationUpdates(
+					LocationManager.GPS_PROVIDER, 1000, 0, mLocationListener);
+		} catch (IllegalArgumentException e) {
+			// TODO: show a dialog that GPS is not availabe and exit
+			System.exit(1);
+		}
+
+		mLocationListener = new MyLocationListener();
+		
+		
+		getWindow().setFormat(PixelFormat.JPEG);
+		setContentView(R.layout.take_snap);
+		mSurfaceView = (SurfaceView) findViewById(R.id.review_surface);
+
+		mSurfaceHolder = mSurfaceView.getHolder();
+		mSurfaceHolder.addCallback(this);
+		mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		// setContentView(R.layout.main);
+	}
+
+	//@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+			Camera.Parameters p = mCamera.getParameters();
+			p.remove("gps-latitude");
+			p.remove("gps-longitude");
+			p.remove("gps-altitude");
+			p.remove("gps-timestamp");
+
+			Location loc = mLocationListener.getLocation();
+			
+			if (loc != null) {
+				p.set("gps-latitude", "" + loc.getLatitude());
+				p.set("gps-longitude", "" + loc.getLongitude());
+				if (loc.hasAltitude()) {
+					p.set("gps-altitude", String.valueOf(loc.getAltitude()));
+				} else {
+					// for NETWORK_PROVIDER location provider, we may have
+					// no altitude information, but the driver needs it, so
+					// we fake one.
+					p.set("gps-altitude", "0");
+				}
+				if (loc.getTime() != 0) {
+					// Location.getTime() is UTC in milliseconds.
+					// gps-timestamp is UTC in seconds.
+					long utcTimeSeconds = loc.getTime() / 1000;
+					p.set("gps-timestamp", String.valueOf(utcTimeSeconds));
+				}
+				mCamera.setParameters(p);
+			} else
+				Log.d(TAG, "location is null");
+			mCamera.takePicture(null, null, new MyPictureCallBack(loc, this));
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	//@Override
+	protected void onActivityResult(int requestCode, int resultCode,
+			Intent intent) {
+		Bundle extras = intent.getExtras();
+
+		String description = "";
+		switch (requestCode) {
+		case ACTIVITY_EXTRA_INFO:
+			Log.d(TAG, "ACTIVITY_EXTRA_INFO returned");
+
+			if (resultCode != RESULT_CANCELED) {
+				description = extras.getString(ExtraInfo.KEY_DESCRIPTION);
+				Log.d(TAG, "result != RESULT_CANCELED");
+			}
+			if (description == null)
+				Log.d(TAG, "description is null");
+			if (description.equals(""))
+				Log.d(TAG, "descritpion is empty");
+			ContentValues values = new ContentValues(3);
+			values.put(MediaStore.Images.Media.DISPLAY_NAME, "gEOtAG Picture");
+			values.put(MediaStore.Images.Media.DESCRIPTION, description);
+			values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+			Uri uri = getContentResolver().insert(
+					MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+			Bitmap bitmap = BitmapFactory.decodeByteArray(mPictureData, 0,
+					mPictureData.length);
+
+			try {
+				OutputStream outputStream = getContentResolver()
+						.openOutputStream(uri);
+				bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outputStream);
+				outputStream.flush();
+				outputStream.close();
+
+				try {
+					addDescriptionToImage(uri, description);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					Log.d(TAG,"Exception in addDescriptionToImage()");
+					if(e.getMessage()!=null){
+						Log.d(TAG,e.getMessage());
+					}
+				}
+
+				setResult(RESULT_OK);
+			} catch (FileNotFoundException e) {
+				Log.e(TAG, "Can not open file to write image");
+				setResult(RESULT_FIRST_USER);
+			} catch (IOException e) {
+				Log.e(TAG, "Error closing ouput stream");
+				setResult(RESULT_FIRST_USER);
+			}
+
+			finish();
+			break;
+		}
+
+	}
+
+	private void addDescriptionToImage(Uri uri, String description) {
+		File tempFile = null;
+		String fileName = null;
+		String[] projection = { MediaStore.Images.ImageColumns.DATA };
+
+		Cursor c = managedQuery(uri, projection, null, null, null);
+		if (c != null && c.moveToFirst())
+			fileName = c.getString(0);
+		Log.d(TAG, "File Name= " + fileName);
+
+		File file = new File(fileName);
+
+		IImageMetadata metadata = null;
+		JpegImageMetadata jpegMetadata = null;
+		TiffImageMetadata exif = null;
+		OutputStream os = null;
+		TiffOutputSet outputSet = new TiffOutputSet();
+
+		try {
+			metadata = Sanselan.getMetadata(file);
+		} catch (ImageReadException ire) {
+			Log.d(TAG, "ImageReadException");
+		} catch (IOException ioe) {
+			Log.d(TAG, "IOException");
+		}
+		// establish jpegMedatadata
+		if (metadata != null) {
+			jpegMetadata = (JpegImageMetadata) metadata;
+		}
+
+		// establish exif
+		if (jpegMetadata != null) {
+			exif = jpegMetadata.getExif();
+		}
+
+		// establish outputSet
+		if (exif != null) {
+			try {
+				outputSet = exif.getOutputSet();
+			} catch (ImageWriteException e) {
+				Log.d(TAG, "ImageWriteException on getOutputSet");
+			}
+		}
+		if (outputSet != null) {
+			// check if field already EXISTS - if so remove
+			TiffOutputField imageDescription = outputSet
+					.findField(TiffConstants.EXIF_TAG_IMAGE_DESCRIPTION);
+			if (imageDescription != null) {
+				outputSet.removeField(TiffConstants.EXIF_TAG_IMAGE_DESCRIPTION);
+			}
+			
+			// add field
+			try {
+				imageDescription = new TiffOutputField(
+						ExifTagConstants.EXIF_TAG_IMAGE_DESCRIPTION,
+						TiffFieldTypeConstants.FIELD_TYPE_ASCII, description
+								.length(), description.getBytes());
+				TiffOutputDirectory exifDirectory = outputSet
+						.getOrCreateExifDirectory();
+				exifDirectory.add(imageDescription);
+				Location loc = mLocationListener.getLocation();
+				if (loc != null) {
+					outputSet.setGPSInDegrees(loc.getLongitude(), loc.getLatitude());					
+				}
+				
+			} catch (ImageWriteException e) {
+				Log.d(TAG, "ImageWriteException on new TiffOutputField()");
+			}
+
+		}
+
+		// create stream using temp file for dst
+		try {
+			tempFile = File.createTempFile(
+					"temp-" + System.currentTimeMillis(), ".jpeg");
+			os = new FileOutputStream(tempFile);
+			os = new BufferedOutputStream(os);
+		} catch (IOException e) {
+			Log.d(TAG, "IOException creating temp file");
+		}
+
+		// write/update EXIF metadata to output stream
+		try {
+			new ExifRewriter().updateExifMetadataLossless(file, os, outputSet);
+		} catch (ImageReadException e) {
+			Log.d(TAG, "ImageReadException - " + e.getMessage());
+		} catch (ImageWriteException e) {
+			Log.d(TAG, "ImageWriteException - " + e.getMessage());
+		} catch (IOException e) {
+			Log.d(TAG, "IOException - " + e.getMessage());
+		} finally {
+			if (os != null) {
+				try {
+					os.close();
+				} catch (IOException e) {
+				}
+			}
+		}
+
+		// copy temp file over original file
+		String s = file.getAbsolutePath();
+		file.delete();
+		tempFile.renameTo(file);
+
+	}
+
+	//@Override
+	public void surfaceChanged(SurfaceHolder holder, int format, int width,
+			int height) {
+		try {
+			mCamera.stopPreview();
+		} catch (Exception e1) {
+			Log.d(TAG, "stopPreview exception");
+		}
+		Camera.Parameters p = mCamera.getParameters();
+		p.setPreviewSize(width, height);
+		mCamera.setParameters(p);
+		try {
+			mCamera.setPreviewDisplay(holder);
+		} catch (IOException ioe) {
+			Log.d(TAG, "setPreviewDisplayFailed");
+			Log.d(TAG, ioe.getMessage());
+		}
+		mCamera.startPreview();
+	}
+
+	//@Override
+	public void surfaceCreated(SurfaceHolder holder) {
+		mCamera = Camera.open();
+	}
+
+	//@Override
+	public void surfaceDestroyed(SurfaceHolder holder) {
+		mCamera.stopPreview();
+		mCamera.release();
+
+	}
+
+	private final class MyPictureCallBack implements Camera.PictureCallback {
+		private Location mLocation;
+		private Context mContext;
+
+		public MyPictureCallBack(Location loc, Context c) {
+			mLocation = loc;
+			mContext = c;
+		}
+
+		//@Override
+		public void onPictureTaken(byte[] data, Camera camera) {
+			if (data != null) {
+				Log.d(TAG, "data is not null, length=" + data.length);
+
+				// save picture data and start second activity to get extra info
+				mPictureData = data;
+
+				startActivityForResult(new Intent(mContext, ExtraInfo.class),
+						ACTIVITY_EXTRA_INFO);
+			} else
+				Log.d(TAG, "data is null");
+		}
+
+	}
+
+	private final class MyLocationListener implements LocationListener {
+		Location mLocation;
+		boolean mAvailabe;
+		boolean shown;
+
+		public MyLocationListener() {
+			mLocation = new Location(LocationManager.GPS_PROVIDER);
+			mAvailabe = false;
+			shown = false;
+		}
+
+		//@Override
+		public void onLocationChanged(Location newLocation) {
+			mLocation.set(newLocation);
+			Log.d(TAG, "new location lat="+newLocation.getLatitude()+" long="+newLocation.getLongitude());
+		}
+
+		//@Override
+		public void onProviderDisabled(String provider) {
+			mAvailabe = false;
+		}
+
+		//@Override
+		public void onProviderEnabled(String provider) {
+			mAvailabe = true;
+		}
+
+		//@Override
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+			switch (status) {
+			case LocationProvider.OUT_OF_SERVICE:
+			case LocationProvider.TEMPORARILY_UNAVAILABLE:
+				mAvailabe = false;
+			case LocationProvider.AVAILABLE:
+				mAvailabe = true;
+			}
+		}
+
+		Location getLocation() {
+			return mAvailabe ? mLocation : null;
+		}
+
+	}
+}

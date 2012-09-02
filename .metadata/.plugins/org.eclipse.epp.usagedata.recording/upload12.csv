@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.import",1252363637156
+started,bundle,org.eclipse.debug.core,3.5.0.v20090526-1600,"org.eclipse.debug.core",1252363637515
+started,bundle,org.eclipse.jdt.launching,3.5.0.v20090527,"org.eclipse.jdt.launching",1252363637546
+activated,view,org.eclipse.ui.console,3.4.0.v20090513,"org.eclipse.ui.console.ConsoleView",1252363643796
+activated,view,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.PackageExplorer",1252363645484
+started,bundle,org.eclipse.wst.sse.core,1.1.400.v200905141750,"org.eclipse.wst.sse.core",1252363645765
+error,log,,,"Could not create action delegate for id: com.android.ide.eclipse.adt.project.NewXmlFileWizardAction",1252363646578
+error,log,,,"Plug-in com.android.ide.eclipse.adt was unable to load class com.android.ide.eclipse.adt.project.NewXmlFileWizardAction.",1252363646578
+started,bundle,org.eclipse.compare,3.5.0.I20090514-0808,"org.eclipse.compare",1252363646703
+started,bundle,org.eclipse.jdt.apt.core,3.3.200.v20090528-1135,"org.eclipse.jdt.apt.core",1252363650156
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363669656
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363671515
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363673890
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363675406
+started,bundle,org.eclipse.debug.ui,3.5.0.v20090603,"org.eclipse.debug.ui",1252363680812
+executed,command,,,"com.android.ide.eclipse.adt.debug.launching.LaunchShortcut.run",1252363681265
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363684187
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363690203
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363691468
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363694968
+closed,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252363697343
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.restartWorkbench",1252363697531
+stopped,bundle,org.eclipse.mylyn.ide.ant,3.2.1.v20090722-0200-e3x,"org.eclipse.mylyn.ide.ant",1252363697562
+stopped,bundle,org.eclipse.ant.ui,3.4.0.v20090520,"org.eclipse.ant.ui",1252363697562
+stopped,bundle,org.eclipse.compare.win32,1.0.0.I20090430-0408,"org.eclipse.compare.win32",1252363697562

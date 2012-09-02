@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+error,log,,,"Could not create action delegate for id: com.android.ide.eclipse.adt.project.NewXmlFileWizardAction",1252522947531
+error,log,,,"Plug-in com.android.ide.eclipse.adt was unable to load class com.android.ide.eclipse.adt.project.NewXmlFileWizardAction.",1252522947546
+started,bundle,org.eclipse.compare,3.5.0.I20090514-0808,"org.eclipse.compare",1252522948093
+started,bundle,org.eclipse.debug.ui,3.5.0.v20090603,"org.eclipse.debug.ui",1252522950484
+started,bundle,org.eclipse.jdt.junit,3.5.0.v20090526-2000,"org.eclipse.jdt.junit",1252522950609
+executed,command,,,"com.android.ide.eclipse.adt.debug.launching.LaunchShortcut.run",1252522953437
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252522962375
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252522963187
+executed,command,,,"com.android.ide.eclipse.adt.debug.launching.LaunchShortcut.run",1252522968421
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252522973671
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252522974453
+activated,view,org.eclipse.ui.console,3.4.0.v20090513,"org.eclipse.ui.console.ConsoleView",1252522975656
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252522984062
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252522984953
+activated,view,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.PackageExplorer",1252522985562
+executed,command,,,"com.android.ide.eclipse.adt.debug.launching.LaunchShortcut.run",1252522987890
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252522990671
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252522991359
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252522991781
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252522992156
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252522992578
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252522993500
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252522994859
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252522998531
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1252523001593

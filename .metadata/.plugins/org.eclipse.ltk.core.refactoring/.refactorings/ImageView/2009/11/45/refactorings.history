@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;ImageView/src/com/adnan&apos; to &apos;geo&apos;" description="Rename resource &apos;adnan&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/com/adnan" name="geo" stamp="1257198243375" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;ImageView/src/com/geo&apos; to &apos;geotag_imageview&apos;" description="Rename resource &apos;geo&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/com/geo" name="geotag_imageview" stamp="1257198261984" updateReferences="true"/>
+</session>
